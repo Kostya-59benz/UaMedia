@@ -1,4 +1,3 @@
-from http.client import HTTPResponse
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.views.generic import ListView,DetailView
@@ -8,6 +7,7 @@ from .models import Movie, Category, Actor, Genre, Rating
 from django.shortcuts import redirect
 # Create your views here.
 from django.db.models import Q
+from http.client import HTTPResponse
 from .forms import ReviewForm, RatingForm
 
 
@@ -60,6 +60,7 @@ class ActorView(GenreYear,DetailView):
   model = Actor
   template_name = 'uaMedia/actor.html'
   slug_field = "name"
+  
 
 
 class FilterMoviesView(GenreYear, ListView):
