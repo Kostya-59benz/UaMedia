@@ -9,3 +9,9 @@ class ContactView(CreateView):
     model = Contact
     form_class = ContactForm
     success_url = "/"
+
+    def form_valid(self,form):
+	form.save()
+	send(form.instance.email)
+	
+	return super().form_valid(form)
