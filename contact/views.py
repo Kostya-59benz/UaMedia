@@ -2,7 +2,7 @@ from django.views.generic import CreateView
 
 from .models import Contact
 from .forms import ContactForm
-
+from .service import send
 
 
 class ContactView(CreateView):
