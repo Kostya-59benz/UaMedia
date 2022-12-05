@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from .models import Contact
 from .forms import ContactForm
 from .service import send
-
+from .tasks import send_spam_mail
 
 class ContactView(CreateView):
     model = Contact
@@ -12,6 +12,6 @@ class ContactView(CreateView):
 
     def form_valid(self,form):
         form.save()
-        send(form.instance.email)
-        
+        #send(form.instance.email)
+        send_spam_mail.delay(form.instance.email)
         return super().form_valid(form)
