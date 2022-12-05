@@ -221,3 +221,19 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+#smtp
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'razerresolution@gmail.com'
+EMAIL_HOST_PASSWORD = 'pztwhmdcpwyhhmhc'
+EMAIL_PORT = 587
+
+
+# redis related settings
+
+
+
+
+

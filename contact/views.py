@@ -11,7 +11,7 @@ class ContactView(CreateView):
     success_url = "/"
 
     def form_valid(self,form):
-	form.save()
-	send(form.instance.email)
-	
-	return super().form_valid(form)
+        form.save()
+        send(form.instance.email)
+        
+        return super().form_valid(form)
