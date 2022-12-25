@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from .models import Movie, Category, Actor, Genre, Rating
 from django.shortcuts import redirect
 # Create your views here.
-from django.db.models import Q
+from django.db.models import Q, Sum, Max, Min, Count, Avg, Value
 from http.client import HTTPResponse
 from .forms import ReviewForm, RatingForm
 
@@ -33,11 +33,13 @@ class MovieDetailView(GenreYear,DetailView):
   """ Полное описание фильма """
   model = Movie
   slug_field ="url"
-
+  movie = Movie.objects.all()
+  agg = movie.aggregate(Min('year'))
 
   def get_context_data(self, **kwargs):
     context =  super().get_context_data(**kwargs)        
     context['star_form'] = RatingForm()
+    context['agg'] = self.agg
     return context
 
 class AddReview(View):

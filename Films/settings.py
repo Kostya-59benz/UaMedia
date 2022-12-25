@@ -35,27 +35,32 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
     'uaMedia',
     'contact',
-    
-    
+    'django_extensions',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware', 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -76,19 +81,10 @@ TEMPLATES = [
         },
     },
 ]
-if DEBUG:
-    MIDDLEWARE += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ]
-    INSTALLED_APPS += [
-        'debug_toolbar',
-    ]
-    INTERNAL_IPS = ['127.0.0.1', ]
 
 
 
 
-WSGI_APPLICATION = 'Films.wsgi.application'
 
 
 # Database
@@ -101,6 +97,10 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -124,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -133,6 +133,21 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('ru', gettext("Russia")),
+    ('en', gettext("English")),
+)
+
+LOGIN_REDIRECT_URL = '/'
+
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_REDIRECT_URL = "/"
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -245,5 +260,4 @@ CELERY_RESULT_SERIALIZER= 'json'
 
 
 
-
-
+SITE_ID = 1 
