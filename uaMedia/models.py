@@ -1,13 +1,14 @@
-from email.policy import default
+
 from django.db import models
 from datetime import date
 from django.urls import reverse
+
 
 class Category(models.Model):
     """Категории"""
     name = models.CharField("Категория", max_length=150)
     description = models.TextField("Описание", default='Null')
-    url= models.SlugField(max_length=160, unique=True)
+    url = models.SlugField(max_length=160, unique=True)
 
 
     def __str__(self) -> str:
@@ -161,14 +162,3 @@ class Reviews(models.Model):
         verbose_name_plural = "Отзывы"
         
 
-
-
-        
-
-
-
-    
-
-
-    
-    

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 from django.views.generic.base import View
 from django.views.generic import ListView,DetailView
 
@@ -25,7 +25,7 @@ class MovieView(GenreYear, ListView):
   model = Movie
   queryset = Movie.objects.filter(draft=False)
   #template_name = "uaMedia/movies.html"
-  paginate_by = 1
+  paginate_by = 2
 
 
 
